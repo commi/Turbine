@@ -280,9 +280,8 @@ if($_GET['files']){
 								if(count($matches) == 3){
 									$plugin_settings_key = trim($matches[1]);
 									$plugin_settings_val = trim(rtrim($matches[2], ';')); // Dont forget to strip semicolons
-									if(in_array($plugin_settings_key, $plugin_list)){
-										$plugin_settings[$plugin_settings_key] = $plugin_settings_val;
-									}
+
+									$plugin_settings[$plugin_settings_key] = $plugin_settings_val;
 								}
 							}
 						}
