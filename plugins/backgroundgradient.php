@@ -32,7 +32,7 @@ function backgroundgradient(&$parsed){
 	include('lib/utility.php');
 	$settings = Plugin::get_settings('backgroundgradient');
 	// Searches for W3C-style two-stepped linear gradient
-	$gradientregex = '/linear-gradient\s*?\(\s*?(top|left)\s*?,\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+\)),\s*(.*)\s*\)/i';
+	$gradientregex = '/linear-gradient\s*?\(\s*?(top|left)\s*?,\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+?\)),\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+?\))\s*\)/i';
 	// In which properties to search
 	$urlproperties = array('background', 'background-image');
 	// Loop through the array
@@ -132,7 +132,7 @@ function backgroundgradient(&$parsed){
 								$filter_properties['-ms-filter'] = array($filter);
 								// Salvage any background information that is NOT gradient stuff and preserve it in a form IE can handle
 								$background_rest = preg_replace(
-									'/(-moz-|-webkit-|-khtml-)*linear-gradient\s*?\(\s*?(top|left)\s*?,\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+\)),\s*(.*)\s*\)/i',
+									'/(-moz-|-webkit-|-khtml-)*linear-gradient\s*?\(\s*?(top|left)\s*?,\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+?\)),\s*(\#[0-9A-F]+|(?:rgb|hsl)(?:a)*\s*\(.+?\))\s*\)/i',
 									'',
 									$parsed[$block][$selector][$property][$i]
 								);
