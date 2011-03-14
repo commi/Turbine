@@ -205,10 +205,10 @@ public function hexsyntax($rgba, $force = false, $minify = false){
 	$hex[] = dechex($rgba['b']);
 	$syntax = '#';
 	foreach($hex as $val){
-		$syntax .= $val;
-		if(($rgba['a'] !== 1 || $force || !$minify) && strlen($val) == 1){
-			$syntax .= $val;
+		if(strlen($val) == 1){
+			$syntax .= '0';
 		}
+		$syntax .= $val;
 	}
 	return $syntax;
 }
