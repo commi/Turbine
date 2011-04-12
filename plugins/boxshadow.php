@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  */
@@ -12,17 +12,17 @@
 /**
  * Easy box shadow
  * Adds vendor-specific versions of box-shadow
- * 
+ *
  * Usage:   #foo { box-shadow: 2px 2px 8px #666; }
  * Result:  #foo { box-shadow: 2px 2px 8px #666; -moz-box-shadow: 2px 2px 8px #666; -webkit-box-shadow: 2px 2px 8px #666; }
  * Status:  Stable
  * Version: 1.2
- * 
+ *
  * @param mixed &$parsed
  * @return void
  */
 function boxshadow(&$parsed){
-	global $cssp;
+	global $cssp, $browser;
 	$settings = Plugin::get_settings('boxshadow');
 	foreach($parsed as $block => $css){
 		foreach($parsed[$block] as $selector => $styles){
@@ -36,7 +36,7 @@ function boxshadow(&$parsed){
 							$shadow_properties[$prefix.'box-shadow'] = $parsed[$block][$selector]['box-shadow'];
 						}
 						// Get IE filters, merge them with the other new properties and insert everything
-						if(is_array($settings) && !in_array('noie', $settings)){
+						if(is_array($settings) && !in_array('noie', $settings) && !($browser->engine == 'ie' AND $browser->engine_version >= 9.0)){
 							$filter_properties = boxshadow_filters($values);
 							$shadow_properties = array_merge($shadow_properties, $filter_properties);
 						}
