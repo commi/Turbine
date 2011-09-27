@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  */
@@ -12,13 +12,13 @@
 /**
  * Data-URI
  * Injects all images smaller than 24KB right inside the CSS for all dataURI-capable browsers
- * 
+ *
  * Usage: Nobrainer, just switch it on
  * Example: -
  * Status:  Probably unstable as hell
  * Version: ?
- * 
- * 
+ *
+ *
  * datauri
  * @param mixed &$parsed
  * @return void
@@ -113,7 +113,7 @@ function datauri_get_mode(){
 	global $browser;
 	$mode = NULL;
 	if(
-		($browser->engine == 'ie' && floatval($browser->engine_version) >= 8) || 
+		($browser->engine == 'ie' && floatval($browser->engine_version) >= 8) ||
 		$browser->engine == 'gecko' ||
 		$browser->engine == 'opera' ||
 		$browser->engine == 'webkit' ||
@@ -124,7 +124,7 @@ function datauri_get_mode(){
 	elseif(
 		$browser->engine == 'ie' &&
 		(
-			(floatval($browser->engine_version) < 7 && $browser->platform == 'windows') || 
+			(floatval($browser->engine_version) < 7 && $browser->platform == 'windows') ||
 			(floatval($browser->engine_version) < 8)
 		)
 	){
@@ -153,6 +153,11 @@ function datauri_get_file($filename){
 		str_replace('\\','/',
 		dirname(__FILE__))
 	);
+
+	// skip any remote files
+	if(preg_match('/^[a-z]+\:\/\//i', $filename))
+		return $file;
+
 	foreach($basedirectories as $basedirectory){
 		$imagefile = ($basedirectory) ? $basedirectory.'/'.$filename : $filename;
 		if(file_exists($imagefile)){
