@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  */
@@ -11,11 +11,11 @@
 
 /**
  * Cross-browser-box-sizing
- * 
+ *
  * Usage:     box-sizing:inherit|content-box|border-box
  * Status:    Beta
  * Version:   1.0
- * 
+ *
  * @param mixed &$parsed
  * @return void
  */
@@ -29,6 +29,7 @@ function boxsizing(&$parsed){
 				$boxsizing_rules = array(
 					'-moz-box-sizing' => $styles['box-sizing'],
 					'-webkit-box-sizing' => $styles['box-sizing'],
+					'-ms-box-sizing' => $styles['box-sizing'],
 					'behavior' => array('url('.$htc_path.')')
 				);
 				$cssp->insert_properties($boxsizing_rules, $block, $selector, null, 'box-sizing');

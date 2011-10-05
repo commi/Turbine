@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  *
@@ -17,17 +17,17 @@
 /**
  * Adds vendor-specific versions transition
  * No Fallback for IE
- * 
+ *
  * Usage:     transition: [property] [time] [type]
  * Example 1: transition: opacity 50ms linear
  * Example 2: transition: height 3s ease-out
  * Status:    Beta
  * Version:   0.2
- * 
+ *
  * @param mixed &$parsed
  * @return void
  */
- 
+
 function transition(&$parsed){
 	global $cssp;
 	foreach($parsed as $block => $css){
@@ -37,7 +37,7 @@ function transition(&$parsed){
 					if($property == 'transition'){
 						$transition_properties = array();
 						// Build prefixed properties
-						$prefixes = array('-moz-', '-webkit-','-o-');
+						$prefixes = array('-moz-', '-webkit-','-o-','-ms-');
 						foreach($prefixes as $prefix){
 							$transition_properties[$prefix.'transition'] = $parsed[$block][$selector]['transition'];
 						}
@@ -52,8 +52,8 @@ function transition(&$parsed){
 		}
 	}
 }
- 
- 
+
+
  /**
  * Register the plugin
  */
