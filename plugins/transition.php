@@ -57,5 +57,5 @@ function transition(&$parsed){
  /**
  * Register the plugin
  */
-$cssp->register_plugin('before_glue', 0, 'transition');
+$cssp->register_plugin('transition', 'transition', 'before_glue', 0);
  ?>
