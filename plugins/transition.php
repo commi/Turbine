@@ -32,16 +32,16 @@ function transition(&$parsed){
 	global $cssp;
 	foreach($parsed as $block => $css){
 		foreach($parsed[$block] as $selector => $styles){
-			if(isset($parsed[$block][$selector]['transition'])){
+			if(isset($parsed[$block][$selector]['transition'])||isset($parsed[$block][$selector]['transition-duration'])||isset($parsed[$block][$selector]['transition-property'])||isset($parsed[$block][$selector]['transition-timing-function'])||isset($parsed[$block][$selector]['transition-delay'])){
 				foreach($styles as $property => $values){
-					if($property == 'transition'){
+					if(preg_match('/^transition/i', $property)){
 						$transition_properties = array();
 						// Build prefixed properties
 						$prefixes = array('-moz-', '-webkit-','-o-','-ms-');
 						foreach($prefixes as $prefix){
-							$transition_properties[$prefix.'transition'] = $parsed[$block][$selector]['transition'];
+							$transition_properties[$prefix.$property] = $parsed[$block][$selector][$property];
 						}
-						$cssp->insert_properties($transition_properties, $block, $selector, null, 'transition');
+						$cssp->insert_properties($transition_properties, $block, $selector, null, $property);
 						// Comment the newly inserted properties
 						foreach($transition_properties as $transition_property => $transition_value){
 							CSSP::comment($parsed[$block][$selector], $transition_property, 'Added by transition plugin');
