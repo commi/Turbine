@@ -116,6 +116,7 @@ if($_GET['files']){
 	if($cssp->config['debug_level'] == 0 && isset($_SERVER['HTTP_IF_NONE_MATCH']) && $_SERVER['HTTP_IF_NONE_MATCH'] === $etag){
 		// Browser already has the file so we tell him nothing changed and exit
 		header('HTTP/1.1 304 Not Modified');
+		header('Expires: '.gmdate('D, d M Y H:i:s', time() + intval($cssp->config['expire_in_future'])).' GMT');
 		exit();
 	}
 
