@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  */
@@ -12,12 +12,12 @@
 /**
  * Color
  * Provides HSL(A) support for all browsers
- * 
+ *
  * Usage:   Nobrainer, just switch it on
  * Example: -
  * Status:  Beta
  * Version: 2.0
- * 
+ *
  * @param mixed &$cssp->parsed
  * @return void
  */
@@ -47,10 +47,13 @@ function color(){
 							}
 							// If we detect IE and work with a background, try filters...
 							if($browser->browser == 'ie' && $browser->browser_version < 9 && ($search == 'background' || $search == 'background-color')){
-								$filter = color_get_filter($rgba, $search);
-								$cssp->insert_properties($filter, $block, $selector, NULL, $search);
-								foreach($filter as $filter_property => $filter_value){
-									CSSP::comment($cssp->parsed[$block][$selector], $filter_property, 'Modified by color plugin');
+								if(!isset($cssp->parsed[$block][$selector]['filter']))
+								{
+									$filter = color_get_filter($rgba, $search);
+									$cssp->insert_properties($filter, $block, $selector, NULL, $search);
+									foreach($filter as $filter_property => $filter_value){
+										CSSP::comment($cssp->parsed[$block][$selector], $filter_property, 'Modified by color plugin');
+									}
 								}
 							}
 							// Otherwise just provide an ugly, automatic fallback
