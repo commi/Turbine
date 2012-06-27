@@ -3,7 +3,7 @@
 /**
  * This file is part of Turbine
  * http://github.com/SirPepe/Turbine
- * 
+ *
  * Copyright Peter Kröner
  * Licensed under GNU LGPL 3, see license.txt or http://www.gnu.org/licenses/
  */
@@ -13,15 +13,15 @@
  * Easy and extended border radius
  * Adds vendor-specific versions of border-radius and adds border-top-radius,
  * border-bottom-radius, border-left-radius and border-right-radius
- * For IE, only general radius works. And make sure, border-radius declaration 
+ * For IE, only general radius works. And make sure, border-radius declaration
  * comes before any (box-)shadow-declaration in CSS-code!
- * 
+ *
  * Usage:     border-radius[-top/-bottom/-left/-right/-top-left/...]: value;
  * Example 1: border-top-radius:4px;
  * Example 2: border-bottom-left-radius:2em;
  * Status:    Stable
  * Version:   1.1
- * 
+ *
  * @param mixed &$parsed
  * @return void
  */
@@ -32,7 +32,7 @@ function borderradius(&$parsed){
 	foreach($parsed as $block => $css){
 		foreach($parsed[$block] as $selector => $styles){
 			foreach($styles as $property => $values){
-				if(preg_match('/border(?:-(top|right|bottom|left)(?:-(right|left))*)*-radius/', $property, $matches)){
+				if(preg_match('/(border|outline)(?:-(top|right|bottom|left)(?:-(right|left))*)*-radius/i', $property, $matches)){
 					// Create the new rules and insert them
 					$borderradius_rules = borderradius_glue_rules($matches, $values);
 					// Disabled for the moment
@@ -66,39 +66,39 @@ function borderradius_glue_rules($parts, $value){
 	$partnum = count($parts);
 	foreach($prefixes as $prefix){
 		// Simple border-radius
-		if($partnum == 1){
+		if($partnum == 2){
 			$properties[$prefix.$parts[0]] = $value;
 		}
 		// Top/Left/Bottom/Right shortcuts
-		elseif($partnum == 2){
-			if($parts[1] == 'top' || $parts[1] == 'bottom'){
+		elseif($partnum == 3){
+			if($parts[2] == 'top' || $parts[1] == 'bottom'){
 				if($prefix == '-moz-'){
-					$properties[$prefix.'border-radius-'.$parts[1].'right'] = $value;
-					$properties[$prefix.'border-radius-'.$parts[1].'left'] = $value;
+					$properties[$prefix.$parts[1].'-radius-'.$parts[2].'right'] = $value;
+					$properties[$prefix.$parts[1].'-radius-'.$parts[2].'left'] = $value;
 				}
 				else{
-					$properties[$prefix.'border-'.$parts[1].'-right-radius'] = $value;
-					$properties[$prefix.'border-'.$parts[1].'-left-radius'] = $value;
+					$properties[$prefix.$parts[1].'-'.$parts[2].'-right-radius'] = $value;
+					$properties[$prefix.$parts[1].'-'.$parts[2].'-left-radius'] = $value;
 				}
 			}
-			elseif($parts[1] == 'left' || $parts[1] == 'right'){
+			elseif($parts[2] == 'left' || $parts[2] == 'right'){
 			if($prefix == '-moz-'){
-					$properties[$prefix.'border-radius-top'.$parts[1]] = $value;
-					$properties[$prefix.'border-radius-bottom'.$parts[1]] = $value;
+					$properties[$prefix.$parts[1].'-radius-top'.$parts[2]] = $value;
+					$properties[$prefix.$parts[1].'-radius-bottom'.$parts[2]] = $value;
 				}
 				else{
-					$properties[$prefix.'border-top-'.$parts[1].'-radius'] = $value;
-					$properties[$prefix.'border-bottom-'.$parts[1].'-radius'] = $value;
+					$properties[$prefix.$parts[1].'-top-'.$parts[1].'-radius'] = $value;
+					$properties[$prefix.$parts[1].'-bottom-'.$parts[1].'-radius'] = $value;
 				}
 			}
 		}
 		// Single corners
-		elseif($partnum == 3){
+		elseif($partnum == 4){
 			if($prefix == '-moz-'){
-				$properties[$prefix.'border-radius-'.$parts[1].$parts[2]] = $value;
+				$properties[$prefix.$parts[1].'-radius-'.$parts[2].$parts[3]] = $value;
 			}
 			else{
-				$properties[$prefix.'border-'.$parts[1].'-'.$parts[2].'-radius'] = $value;
+				$properties[$prefix.$parts[1].'-'.$parts[2].'-'.$parts[3].'-radius'] = $value;
 			}
 		}
 	}
