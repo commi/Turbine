@@ -37,8 +37,7 @@ function color(){
 						// Found something that we may have to replace?
 						$hslamatch = preg_match(Utility::$hslapattern, $cssp->parsed[$block][$selector][$search][$i]);
 						$rgbamatch = preg_match(Utility::$rgbapattern, $cssp->parsed[$block][$selector][$search][$i]);
-						if($hslamatch || $rgbamatch){
-							$rgba = Utility::any2rgba($cssp->parsed[$block][$selector][$search][$i]);
+						if(($hslamatch || $rgbamatch) AND $rgba = Utility::any2rgba($cssp->parsed[$block][$selector][$search][$i]) AND $rgba['a'] < 1){
 							// For HSL recalculate to RGBA just to be sure the color will work everywhere
 							if($hslamatch){
 								$replacement = Utility::rgbasyntax($rgba);
