@@ -37,7 +37,7 @@ function datauri(&$parsed){
 			$mhtmlcontent = "Content-Type: multipart/related; boundary=\"_ANY_STRING_WILL_DO_AS_A_SEPARATOR\"\r\n\r\n";
 		}
 		$urlregex = '/(url\()[\'"]*([^\'"\)]+)[\'"]*(\))/i';
-		$urlproperties = array('background', 'background-image', 'src');
+		$urlproperties = array('background', 'background-image', 'src', 'content');
 		// Loop through the array
 		foreach($parsed as $block => $css){
 			foreach($parsed[$block] as $selector => $styles){
