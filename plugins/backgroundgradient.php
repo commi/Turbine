@@ -137,7 +137,7 @@ function backgroundgradient(&$parsed){
 								);
 								$background_rest = trim($background_rest);
 								if($background_rest != ''){
-									$filter_properties['*background'] = array($background_rest);            // IE7 and 6
+									#$filter_properties['*background'] = array($background_rest);            // IE7 and 6
 									$filter_properties['background /*\**/'] = array($background_rest.'\9'); // IE8
 								}
 								// hasLayout stuff
