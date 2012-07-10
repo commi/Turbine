@@ -42,10 +42,6 @@ function borderradius(&$parsed){
 					foreach($borderradius_rules as $border_property => $border_value){
 						CSSP::comment($parsed[$block][$selector], $border_property, 'Added by border radius plugin');
 					}
-					// Remove Top/Left/Bottom/Right shortcuts
-					if(count($matches) == 2){
-						unset($parsed[$block][$selector][$property]);
-					}
 				}
 			}
 		}
