@@ -94,7 +94,7 @@ public static function hsla2rgba($input, $matches = array()){
 	$h = intval($matches[2]) / 360;
 	$s = intval($matches[3]) / 100;
 	$l = intval($matches[4]) / 100;
-	if($s == 0){
+	if($l == 0){
 		$rgba['r'] = $rgba['g'] = $rgba['b'] = 0;
 	}
 	else{
