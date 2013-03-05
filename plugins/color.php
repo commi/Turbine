@@ -62,6 +62,12 @@ function color(){
 								CSSP::comment($cssp->parsed[$block][$selector], $search, 'Modified by color plugin');
 							}
 						}
+						// For HSL recalculate to RGBA just to be sure the color will work everywhere
+						elseif($hslamatch AND $rgba = Utility::any2rgba($cssp->parsed[$block][$selector][$search][$i])) {
+							$replacement = Utility::rgbasyntax($rgba);
+							$cssp->parsed[$block][$selector][$search][$i] = preg_replace(Utility::$hslapattern, $replacement, $cssp->parsed[$block][$selector][$search][$i]);
+							CSSP::comment($cssp->parsed[$block][$selector], $search, 'Modified by color plugin');
+						}
 					}
 				}
 			}
