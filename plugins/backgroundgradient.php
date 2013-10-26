@@ -152,7 +152,7 @@ function backgroundgradient(&$parsed){
 							} // End if(!in_array('noie', $settings))
 
 							// Remove the original value
-							unset($parsed[$block][$selector][$property][$i]);
+							//unset($parsed[$block][$selector][$property][$i]);
 
 						}
 					}
