@@ -59,6 +59,12 @@ function backgroundgradient(&$parsed){
 								'-o-linear-gradient('.$matches[1].','.$matches[2].','.$matches[3].')',
 								$parsed[$block][$selector][$property][$i]
 							);
+							// IE >= 11
+							$parsed[$block][$selector][$property][] = preg_replace(
+								$gradientregex,
+								'-ms-linear-gradient('.$matches[1].','.$matches[2].','.$matches[3].')',
+								$parsed[$block][$selector][$property][$i]
+							);
 
 							// Webkit and KHTML
 							if(strtolower($matches[1]) == 'top'){
