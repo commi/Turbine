@@ -541,7 +541,7 @@ class Parser2 extends Base{
 		$line = trim($line);
 		$len = strlen($line);
 		for($i = 0; $i < $len; $i++ ){
-			$this->switch_string_state($line{$i});
+			//$this->switch_string_state($line{$i});
 			if($this->state != 'st' && $line{$i} == '/' && $line{$i+1} == '/'){  // Break on comment
 				break;
 			}
