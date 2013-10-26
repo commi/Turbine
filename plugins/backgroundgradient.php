@@ -78,11 +78,6 @@ function backgroundgradient(&$parsed){
 								'-webkit-gradient(linear,'.$webkit_gradientdirection.',from('.$matches[2].'),to('.$matches[3].'))',
 								$parsed[$block][$selector][$property][$i]
 							);
-							$parsed[$block][$selector][$property][] = preg_replace(
-								$gradientregex,
-								'-khtml-gradient(linear,'.$webkit_gradientdirection.',from('.$matches[2].'),to('.$matches[3].'))',
-								$parsed[$block][$selector][$property][$i]
-							);
 
 							// Use a SVG background for Opera AND IE9
 							if(($browser->engine == 'opera' AND $browser->engine_version < 11.10) OR ($browser->engine == 'ie' AND $browser->engine_version >= 9.0)){
